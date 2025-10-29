@@ -1,8 +1,9 @@
-import express, { urlencoded } from "express";
+import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import database from "./database/db.js"
 import cookieParser from "cookie-parser";
+import database from "./database/db.js"
+import userRoute from "./routes/userRoutes.js"
 
 dotenv.config();
 
@@ -20,6 +21,14 @@ app.use(cors());
 
 
 const port = process.env.PORT
+
+
+//api's
+
+app.use("/api/v1/user",userRoute)
+
+
+
 
 app.listen(port,()=>{
     database();
