@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken"
 import { User } from "../models/userModel.js";
 
 
@@ -35,61 +36,80 @@ export const register = async (req, res) => {
     console.log(error);
   }
 };
-
 export const login = async (req, res) => {
   try {
     const { email, password, role } = req.body;
 
+    // ✅ Validate input
     if (!email || !password || !role) {
       return res.status(400).send({
         success: false,
-        massege: "Somting is Missing",
+        message: "Something is missing",
       });
     }
-    const user = await User.find({email})
-    if(!user) {
-        return res.status(404).send({
-            success:false,
-            massege:"Inncorrect Email and Password"
-        })
+
+    // ✅ Use findOne (not find)
+    let user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).send({
+        success: false,
+        message: "Incorrect Email or Password",
+      });
     }
-    const isPasswordMatch = await bcrypt.compare(password,user.password);
-     if(!isPasswordMatch) {
-        return res.status(404).send({
-            success:false,
-            massege:"Inncorrect Email and Password"
-        })
+
+    // ✅ Compare password properly
+    const isPasswordMatch = await bcrypt.compare(password, user.password);
+    if (!isPasswordMatch) {
+      return res.status(401).send({
+        success: false,
+        message: "Incorrect Email or Password",
+      });
     }
-    if(role !== user.role){
-         return res.status(400).send({
-            success:false,
-            massege:"Account dosen't exist with current role"
-        });
+
+    // ✅ Check role match
+    if (role !== user.role) {
+      return res.status(400).send({
+        success: false,
+        message: "Account doesn't exist with the current role",
+      });
+    }
+
+    // ✅ Create JWT token
+    const tokenData = { userID: user._id };
+    const token = jwt.sign(tokenData, process.env.SECRET_KEY, {
+      expiresIn: "1d",
+    });
+
+    // ✅ Prepare safe user object
+    const userData = {
+      _id: user._id,
+      fullName: user.fullName,
+      email: user.email,
+      phone: user.phone,
+      role: user.role,
+      profile: user.profile,
     };
-    const tokenData = {
-        userID:user._id
-    }
-    const token = await jwt.sign(tokenData,process.env.SECRET_KEY,{expiresIn:'1d'});
-user={
-  _id:user._id,
-  fullName:user.fullName,
-  email:user.email,
-  phone:user.phone,
-  role:user.role,
-  profile:user.profile
 
-
-}
-
-    return res.status(200).cookie("token",token,{maxAge:1*24*60*60*1000,httpsOnly:true,sameSite:'strict'}).send({
-      massege:`Welcome Back ${user.fullName}`,
-      user,
-      success:true
-    })
-   
-
+    // ✅ Send response
+    return res
+      .status(200)
+      .cookie("token", token, {
+        maxAge: 1 * 24 * 60 * 60 * 1000,
+        httpOnly: true,
+        sameSite: "strict",
+      })
+      .send({
+        message: `Welcome back, ${user.fullName}`,
+        user: userData,
+        success: true,
+      });
   } catch (error) {
-    console.log(error);
+    console.log("Login error:", error);
+    return res.status(500).send({
+      success: false,
+      message: "Server error",
+      error: error.message,
+    });
   }
 };
 
@@ -111,14 +131,15 @@ export const logout = async (req,res) =>{
 export const updateProfile = async (req, res) =>{
 try {
   const {fullName,email,phone,bio,skills}=req.body;
-if(!fullName || !email || !phone || !bio || !skills){
-  return res.status(400).send({
-    massege:"Somthing Went Wrong",
-    success:false
-  })
-}
-const skillsArray = skills.split(",");
-const userId = req.id;
+
+  let skillsArray;
+  if(skills){
+
+    
+     skillsArray = skills.split(",");
+  }
+
+const userId = req.params.id;
 let user = await User.findById(userId);
 if(!user){
   return res.status(400).send({
@@ -126,11 +147,11 @@ if(!user){
     success:false
   })
 }
-user.fullName = fullName,
-user.email = email,
-user.phone = phone,
-user.profile.bio = bio,
-user.profile.skills = skillsArray
+if(fullName)user.fullName = fullName;
+if(email)user.email = email;
+if(phone)user.phone = phone;
+if(bio)user.profile.bio = bio;
+if(skills)user.profile.skills = skillsArray;
 
 await user.save();
 user={
