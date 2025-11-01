@@ -1,19 +1,22 @@
-import { application } from "express";
 import mongoose from "mongoose";
 
 const jobSchema = new mongoose.Schema({
-    tittle:{
+    title:{
         type:String,
         required:true
     },
      description:{
         type:String,
         required:true
-    },
+    },  
      requirement:[{
         type:String
     }],
      salary:{
+        type:Number,
+        required:true
+    },
+    experince:{
         type:Number,
         required:true
     },
