@@ -1,5 +1,5 @@
 import { populate } from "dotenv";
-import Application from "../models/applicationModel.js";
+import {Application} from "../models/applicationModel.js";
 import { Job } from "../models/jobModel.js";
 
 export const applyJob = async (req,res)=>{

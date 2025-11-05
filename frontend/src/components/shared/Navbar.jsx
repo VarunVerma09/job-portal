@@ -11,7 +11,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { LogOut, Menu, User2, X } from "lucide-react";
 
 export default function Navbar() {
-  const [user, setUser] = useState(true);
+  const [user, setUser] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
@@ -43,9 +43,23 @@ export default function Navbar() {
         </Link>
 
         {!user ? (
-          <div className="flex gap-3 ">
-            <Button  variant="outline" className="cursor-pointer text-lg px-5 py-5">Login</Button>
-            <Button className="cursor-pointer text-lg px-5 py-5 bg-purple-600 hover:bg-purple-700 ">Signup</Button>
+          <div className="flex gap-3">
+            {/* ✅ Login button with Link */}
+            <Link to="/login">
+              <Button
+                variant="outline"
+                className="cursor-pointer text-lg px-5 py-5"
+              >
+                Login
+              </Button>
+            </Link>
+
+            {/* ✅ Signup button with Link */}
+            <Link to="/signup">
+              <Button className="cursor-pointer text-lg px-5 py-5 bg-purple-600 hover:bg-purple-700">
+                Signup
+              </Button>
+            </Link>
           </div>
         ) : (
           <DropdownMenu>
@@ -119,26 +133,20 @@ export default function Navbar() {
             Browse
           </Link>
 
-          {/* User Dropdown in Mobile */}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="rounded-full p-0">
-                <Avatar className="h-12 w-12 border-2 cursor-pointer">
-                  <AvatarImage src="/avatar.png" alt="User" />
-                  <AvatarFallback>U</AvatarFallback>
-                </Avatar>
+          {/* ✅ Login and Signup buttons in Mobile Menu */}
+          <div className="flex gap-3">
+            <Link to="/login" onClick={() => setMenuOpen(false)}>
+              <Button variant="outline" className="text-base px-5 py-4">
+                Login
               </Button>
-            </DropdownMenuTrigger>
+            </Link>
 
-            <DropdownMenuContent align="center" className="w-28">
-              <DropdownMenuItem
-                className="text-sm text-gray-700 cursor-pointer hover:text-red-500"
-                onClick={() => console.log("User logged out")}
-              >
-                Log out
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+            <Link to="/signup" onClick={() => setMenuOpen(false)}>
+              <Button className="text-base px-5 py-4 bg-purple-600 hover:bg-purple-700">
+                Signup
+              </Button>
+            </Link>
+          </div>
         </div>
       )}
     </nav>
