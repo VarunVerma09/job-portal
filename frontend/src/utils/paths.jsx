@@ -1,0 +1,1 @@
+export const USER_ROUTE = "http://localhost:8081/api/v1/user"
