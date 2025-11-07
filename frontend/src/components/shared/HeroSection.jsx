@@ -9,7 +9,7 @@ function HeroSection() {
 
   return (
    <section className="flex flex-col items-center justify-center   px-10 py-20 text-center">
-      <Badge className="bg-orange-100 text-orange-600 text-xl font-medium mt-10 mb-4 px-4 py-1 rounded-full">
+      <Badge className="bg-orange-100 text-orange-600 text-xl font-medium  mb-4 px-4 py-1 rounded-full">
         No. 1 Job Hunt Website
       </Badge>
 
@@ -23,7 +23,7 @@ function HeroSection() {
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus maiores sit amet esse fuga!
       </p>
 
-      <div className="flex items-center bg-white shadow-lg rounded-full mt-10  px-4 py-3 w-full md:max-w-3xl">
+      <div className="flex items-center bg-white shadow-lg rounded-full mt-5 px-4 py-3 w-full md:max-w-3xl">
         <Input
           type="text"
           placeholder="Find your dream jobs"
