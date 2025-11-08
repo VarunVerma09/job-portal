@@ -9,9 +9,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { LogOut, Menu, User2, X } from "lucide-react";
+import { useSelector } from "react-redux";
 
 export default function Navbar() {
-  const [user, setUser] = useState(false);
+  // const [user, setUser] = useState(false);
+  const {user} = useSelector(store=>store.auth)
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
