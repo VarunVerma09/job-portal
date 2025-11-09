@@ -96,7 +96,7 @@ export default function Navbar() {
 
               <DropdownMenuItem>
                 <div className="flex items-center gap-3 p-2 rounded-lg cursor-pointer hover:bg-gray-100 transition-all">
-                  <User2 /> <span className="font-medium">View Profile</span>
+                  <User2 /> <span className="font-medium"><Link to="/profile">View Profile</Link></span>
                 </div>
               </DropdownMenuItem>
 

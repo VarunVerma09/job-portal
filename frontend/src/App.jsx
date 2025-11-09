@@ -5,6 +5,8 @@ import Signup from "./components/auth/Signup"
 import Home from "./components/pages/Home"
 import Jobs from "./components/pages/Jobs"
 import Browse from "./components/pages/Browse"
+import Profile from "./components/pages/Profile"
+import Description from "./components/pages/Description"
 
 
 function App() {
@@ -18,6 +20,10 @@ function App() {
     <Route path="/signup" element={<Signup/>}></Route>
     <Route path="/jobs" element={<Jobs/>}></Route>
     <Route path="/browse" element={<Browse/>}></Route>
+    <Route path="/profile" element={<Profile/>}></Route>
+    <Route path="/description/:id" element={<Description/>}></Route>
+
+
 
 
     </Routes>

@@ -1,6 +1,9 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export const Job = () => {
+const navigate= useNavigate()
+const jobId = "ahgfasdg4a5sg5agasdgfs4565"
   return (
    <div className="border  rounded-lg shadow-sm bg-white p-5 hover:shadow-md transition duration-200">
       <div className="flex  justify-between items-start">
@@ -36,7 +39,7 @@ export const Job = () => {
       </div>
 
       <div className="flex justify-between items-center mt-5">
-        <button className="text-sm text-purple-700 font-medium hover:underline">
+        <button onClick={()=>navigate(`/description/${jobId}`)} className="text-sm text-purple-700 font-medium hover:underline">
           Details
         </button>
         <button className="bg-purple-600 text-white px-3 py-1 rounded-md text-sm hover:bg-purple-700">
