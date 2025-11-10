@@ -39,7 +39,7 @@ const Profile = () => {
               <div className="flex flex-col sm:flex-row sm:items-center gap-3 mt-3 text-gray-700">
                 <div className="flex items-center gap-2">
                   <Mail className="w-4 h-4" />
-                  <span>aanchal123@gmail.com</span>
+                  <span>user@gmail.com</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Phone className="w-4 h-4" />
@@ -70,7 +70,7 @@ const Profile = () => {
                   href="#"
                   className="text-blue-600 hover:underline font-medium"
                 >
-                  AanchalResume
+                  UserResume
                 </a>
               </div>
             </div>
