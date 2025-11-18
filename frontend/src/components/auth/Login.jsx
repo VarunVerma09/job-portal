@@ -69,12 +69,12 @@ export default function Login() {
       <Navbar />
       <div className="flex justify-center items-center min-h-screen bg-gray-50">
         {/* Right side form */}
-        <div className=" md:w-1/2 w-[95%] bg-white -mt-18 p-10 rounded-2xl shadow-2xl border border-gray-200">
+        <div className=" md:w-1/2 w-[95%] bg-white  p-10 rounded-2xl border border-gray-200">
           <h2 className="text-3xl font-bold text-center mb-8 text-gray-800 tracking-wide">
             Log In
           </h2>
 
-          <form onSubmit={submitHandler} className="space-y-6 text-[1.05rem]">
+          <form onSubmit={submitHandler} className="space-y-6 gap-0 text-[1.05rem]">
             <div>
               <Label htmlFor="fullName" className="text-lg font-medium">
                 Full Name
@@ -84,11 +84,14 @@ export default function Login() {
                 name="fullName"
                 onChange={handler}
                 placeholder="Enter your name"
-                className="mt-2 text-base py-5"
+                className=" text-base py-5"
                 required
               />
             </div>
 
+
+
+{/* form syntax */}
             <div>
               <Label htmlFor="email" className="text-lg font-medium">
                 Email
@@ -99,7 +102,7 @@ export default function Login() {
                 name="email"
                 onChange={handler}
                 placeholder="Enter your email"
-                className="mt-2 text-base py-5"
+                className="text-base py-5"
                 required
               />
             </div>
@@ -113,7 +116,7 @@ export default function Login() {
                 name="password"
                 onChange={handler}
                 placeholder="Enter password"
-                className="mt-2 text-base py-5"
+                className=" text-base py-5"
                 required
               />
             </div>
