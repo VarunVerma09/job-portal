@@ -30,7 +30,7 @@ const HeroSection = () => {
 
                     />
                     <Button onClick={searchJobHandler} className="rounded-r-full   bg-[#6A38C2]">
-                        <Search className='h-8  w-10' />
+                        <Search className='h-7  w-10' />
                     </Button>
                 </div>
             </div>
